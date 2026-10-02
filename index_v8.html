@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>XRP AI Decision Terminal v8 - Teknik Grafik + Türev Konsensüs</title>
+<style>
+:root{--bg:#070b15;--card:#111a2d;--line:#25334d;--text:#eef3ff;--muted:#91a0b9;--green:#4ade80;--yellow:#facc15;--red:#fb7185;--blue:#60a5fa;--orange:#fb923c}
+*{box-sizing:border-box}body{margin:0;background:linear-gradient(180deg,#070b15,#0b1220);color:var(--text);font-family:Inter,Arial,sans-serif}.wrap{max-width:1240px;margin:auto;padding:24px}.top{display:flex;justify-content:space-between;align-items:center;gap:20px}.title{font-size:32px;font-weight:850;margin:0}.sub{color:var(--muted);margin-top:7px}.pill{padding:7px 11px;border-radius:20px;background:#18243b;border:1px solid var(--line);white-space:nowrap}.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:20px 0}.card{background:rgba(17,26,45,.96);border:1px solid var(--line);border-radius:16px;padding:18px;box-shadow:0 10px 30px #0003}.label{color:var(--muted);font-size:13px}.big{font-size:30px;font-weight:800;margin:7px 0}.score{font-size:48px;font-weight:900}.bar{height:10px;background:#25334e;border-radius:10px;overflow:hidden;margin-top:9px}.fill{height:100%;width:50%;transition:.3s}.master{padding:24px;margin-bottom:12px}.signal{font-size:32px;font-weight:900;margin:7px 0}.green{color:var(--green)}.yellow{color:var(--yellow)}.red{color:var(--red)}.blue{color:var(--blue)}.orange{color:var(--orange)}.cols{display:grid;grid-template-columns:1fr 1fr;gap:12px}.rows .row{display:flex;justify-content:space-between;gap:15px;padding:11px 0;border-bottom:1px solid #1f2b42}.reason{padding:9px 0;border-bottom:1px solid #1f2b42;line-height:1.4}.section{margin-top:12px}.section h2{margin:0 0 10px}.warning{border-color:#725e17;background:#19180e}.chartbox{position:relative;height:430px;background:#08101d;border:1px solid var(--line);border-radius:14px;overflow:hidden}.chartbox canvas{width:100%;height:100%;display:block}.charttools{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:10px}.charttools button.active{border-color:#60a5fa;background:#20365a}.chartlegend{display:flex;gap:12px;flex-wrap:wrap;color:var(--muted);font-size:12px;margin-top:8px}.dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:4px}.footer{margin:18px 0;color:#66758f;font-size:12px;line-height:1.5}.mini{font-size:12px;color:var(--muted)}.scores{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}.meter{background:#0c1424;border:1px solid var(--line);border-radius:12px;padding:12px}.meter b{display:block;font-size:20px;margin-top:4px}.meterbar{height:6px;background:#26344e;border-radius:8px;margin-top:8px;overflow:hidden}.meterfill{height:100%}.tag{display:inline-block;padding:4px 8px;border-radius:999px;background:#1b2942;margin:3px 3px 0 0;font-size:12px}.ok{color:var(--green)}.warn{color:var(--yellow)}.bad{color:var(--red)}button{background:#1d2b46;border:1px solid #34496f;color:white;border-radius:10px;padding:8px 12px;cursor:pointer}.table{width:100%;border-collapse:collapse}.table th,.table td{padding:9px 7px;border-bottom:1px solid #1f2b42;text-align:left;font-size:13px}.table th{color:var(--muted);font-weight:600}@media(max-width:1000px){.grid{grid-template-columns:1fr 1fr}.scores{grid-template-columns:repeat(3,1fr)}}@media(max-width:650px){.grid,.cols{grid-template-columns:1fr}.scores{grid-template-columns:1fr 1fr}.wrap{padding:14px}.title{font-size:25px}}
+
+.buybox{border:1px solid #3b82f6;background:linear-gradient(135deg,#101b32,#111a2d);padding:26px}.buyline{display:flex;justify-content:space-between;align-items:center;gap:20px}.buytitle{font-size:20px;font-weight:850}.buydecision{font-size:28px;font-weight:900;margin-top:6px}.buypct{font-size:58px;font-weight:950;line-height:1}.bigbar{height:14px;margin-top:18px}.buyexplain{margin-top:13px;color:var(--muted);font-size:15px}.buygrid{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-top:18px}.buygrid div{background:#0c1424;border:1px solid var(--line);border-radius:10px;padding:10px}.buygrid span{display:block;color:var(--muted);font-size:11px}.buygrid b{display:block;font-size:18px;margin-top:3px}.note{margin-top:15px}@media(max-width:1000px){.buygrid{grid-template-columns:repeat(3,1fr)}}@media(max-width:650px){.buyline{align-items:flex-start}.buypct{font-size:44px}.buygrid{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body><div class="wrap">
+<div class="top"><div><h1 class="title">⚡ XRP AI Decision Terminal</h1><div class="sub">Risk-first XRP karar sistemi · Gerçek emir KAPALI · v8 Grafik + Türev Konsensüs Motoru</div></div><div id="status" class="pill">● BAĞLANIYOR</div></div>
+
+<div class="grid">
+<div class="card"><div class="label">XRP/USDT</div><div id="xrp" class="big">—</div><div id="xrp24" class="mini">—</div></div>
+<div class="card"><div class="label">BTC/USDT</div><div id="btc" class="big">—</div><div id="btc24" class="mini">—</div></div>
+<div class="card"><div class="label">Veri güveni</div><div id="confidence" class="big">—</div><div id="quality" class="mini">—</div></div>
+<div class="card"><div class="label">MASTER SKOR</div><div id="score" class="score">—</div><div class="bar"><div id="fill" class="fill"></div></div></div>
+</div>
+
+<div class="card master"><div class="label">MASTER KARAR</div><div id="signal" class="signal">ANALİZ EDİLİYOR</div><div id="summary" class="sub">Veriler toplanıyor…</div></div>
+
+<div class="card buybox section" id="buyBox">
+  <div class="label">TÜM VERİLERİN BİRLEŞTİRİLMİŞ SONUCU</div>
+  <div class="buyline"><div><div class="buytitle">XRP ALIM UYGUNLUK SKORU</div><div id="buyDecision" class="buydecision">ANALİZ EDİLİYOR</div></div><div id="buyPct" class="buypct">—%</div></div>
+  <div class="bar bigbar"><div id="buyFill" class="fill"></div></div>
+  <div id="buyExplanation" class="buyexplain">Teknik, BTC/piyasa, futures, order book ve risk motorları birleştiriliyor.</div>
+  <div class="buygrid"><div><span>Teknik</span><b id="buyTech">—</b></div><div><span>Piyasa</span><b id="buyMarket">—</b></div><div><span>Futures</span><b id="buyFutures">—</b></div><div><span>Mikro yapı</span><b id="buyMicro">—</b></div><div><span>Güvenlik</span><b id="buySafety">—</b></div></div>
+  <div class="mini note">Bu yüzde kazanma ihtimali değildir; mevcut verilerin alım koşullarını ne kadar desteklediğini gösteren 0–100 uygunluk skorudur.</div>
+</div>
+
+<div class="card section" id="positionBox" style="border-color:#34496f;background:linear-gradient(135deg,#0f1a2d,#111a2d)">
+  <div class="buyline"><div><div class="buytitle">💼 POZİSYON TAKİBİ</div><div class="mini">Gerçek emir göndermez. Senin butonlarınla pozisyon durumunu sisteme bildirir.</div></div><div id="positionStatus" class="buydecision">POZİSYON YOK</div></div>
+  <div class="buygrid" style="margin-top:14px;grid-template-columns:repeat(4,1fr)">
+    <div><span>Miktar (XRP)</span><input id="posQty" type="number" min="0" step="0.0001" placeholder="Örn. 1000" style="width:100%;margin-top:5px;background:#0c1424;color:white;border:1px solid #34496f;border-radius:8px;padding:8px"></div>
+    <div><span>Ortalama alış</span><input id="posAvg" type="number" min="0" step="0.00001" placeholder="Örn. 1.50" style="width:100%;margin-top:5px;background:#0c1424;color:white;border:1px solid #34496f;border-radius:8px;padding:8px"></div>
+    <div><span>Durum</span><b id="posPnl">—</b></div>
+    <div><span>Son fiyat</span><b id="posLast">—</b></div>
+  </div>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:12px">
+    <button id="boughtBtn" style="background:#14532d;border-color:#22c55e">🟢 ALDIM — POZİSYON AÇ</button>
+    <button id="soldBtn" style="background:#7f1d1d;border-color:#ef4444">🔴 SATTIM — POZİSYON KAPAT</button>
+    <button id="clearPosBtn">Sıfırla</button>
+  </div>
+  <div id="positionNote" class="buyexplain">Pozisyon yok. Sistem yeni fırsatları tarıyor.</div>
+</div>
+
+<div class="card section buybox" id="hitrun">
+  <div class="label">⚡ VUR-KAÇ MODU · SPOT</div>
+  <div class="buyline"><div><div class="buytitle">KISA VADELİ İŞLEM PLANI</div><div id="tradeDecision" class="buydecision">ANALİZ EDİLİYOR</div></div><div><div class="mini">15M ZAMANLAMA</div><div id="shortScore" class="score">—</div></div></div>
+  <div class="buygrid"><div><span>Giriş bölgesi</span><b id="entryZone">—</b></div><div><span>Stop</span><b id="tradeStop">—</b></div><div><span>Hedef 1</span><b id="tp1">—</b></div><div><span>Hedef 2</span><b id="tp2">—</b></div><div><span>R/K</span><b id="rr">—</b></div></div>
+  <div id="tradeExplain" class="buyexplain">Sistem kısa vadeli momentum ve risk koşullarını değerlendiriyor.</div>
+  <div class="mini note">Bu mod hızlı spot işlemler içindir. Giriş/stop/hedefler 15 dakikalık ATR ile dinamiktir; garanti kâr anlamına gelmez. Pozisyon açıldıktan sonra skor bozulursa çıkış sinyali üretir.</div>
+</div>
+
+<div class="card section"><h2>📊 XRP Teknik Grafik</h2><div class="mini note">Binance 1 saatlik mumları. Yakınlaştırma/pan yok; grafik canlı yenilenir. EMA, Bollinger ve VWAP sistemin aynı teknik verilerinden hesaplanır.</div><div class="charttools"><button class="active" data-range="120">120 mum</button><button data-range="60">60 mum</button><button data-range="30">30 mum</button></div><div class="chartbox"><canvas id="priceChart"></canvas></div><div class="chartlegend"><span>● Mum</span><span>— EMA20</span><span>— EMA50</span><span>— EMA200</span><span>· · Bollinger</span></div></div>
+
+<div class="card section"><h2>🧠 Beş motorun özeti</h2><div class="scores" id="scoreCards"></div></div>
+
+<div class="cols section">
+<div class="card rows"><h2>📈 Teknik motor</h2>
+<div class="row"><span>EMA 20 / 50 / 200</span><b id="ema">—</b></div><div class="row"><span>VWAP</span><b id="vwap">—</b></div><div class="row"><span>ADX</span><b id="adx">—</b></div><div class="row"><span>ATR (1H)</span><b id="atr1h">—</b></div><div class="row"><span>RSI (1H)</span><b id="rsi">—</b></div><div class="row"><span>MACD</span><b id="macd">—</b></div><div class="row"><span>Bollinger</span><b id="bb">—</b></div><div class="row"><span>Hacim</span><b id="volume">—</b></div><div class="row"><span>Trend</span><b id="trend">—</b></div><div class="row"><span>15M momentum</span><b id="short15">—</b></div><div class="row"><span>15M ATR</span><b id="atr15">—</b></div>
+</div>
+<div class="card rows"><h2>🌎 Piyasa motoru</h2>
+<div class="row"><span>BTC 1H trend</span><b id="btcTrend">—</b></div><div class="row"><span>BTC 24s</span><b id="btc24small">—</b></div><div class="row"><span>BTC 1H RSI</span><b id="btcRsi">—</b></div><div class="row"><span>BTC / XRP yön uyumu</span><b id="alignment">—</b></div><div class="row"><span>Risk rejimi</span><b id="regime">—</b></div>
+</div></div>
+
+<div class="cols section">
+<div class="card rows"><h2>⚙️ Futures motoru</h2>
+<div class="row"><span>Funding</span><b id="funding">—</b></div><div class="row"><span>Open Interest</span><b id="oi">—</b></div><div class="row"><span>OI 1s değişim</span><b id="oiChange">—</b></div><div class="row"><span>Long / Short</span><b id="ls">—</b></div><div class="row"><span>Taker buy/sell</span><b id="taker">—</b></div><div class="row"><span>Likidasyon akışı</span><b id="liq">—</b></div><div class="row"><span>OKX/Bybit türev konsensüsü</span><b id="derivConsensus">—</b></div>
+</div>
+<div class="card rows"><h2>📚 Mikro yapı</h2>
+<div class="row"><span>Spread</span><b id="spread">—</b></div><div class="row"><span>Order book</span><b id="book">—</b></div><div class="row"><span>Mark / spot farkı</span><b id="markGap">—</b></div><div class="row"><span>Kaynak bütünlüğü</span><b id="dataQuality">—</b></div><div class="row"><span>Son güncelleme</span><b id="updated">—</b></div>
+</div></div>
+
+<div class="cols section">
+<div class="card"><h2>🧠 Kararın nedenleri</h2><div id="reasons"><div class="reason">Veri bekleniyor…</div></div></div>
+<div class="card warning"><h2>🛑 Risk motoru</h2><div id="riskText">Henüz risk değerlendirmesi yapılmadı.</div><div id="riskTags" style="margin-top:10px"></div></div>
+</div>
+
+
+<div class="card section" id="assistantBox" style="border-color:#4f46e5;background:linear-gradient(135deg,#11152b,#111a2d)">
+<h2>🤖 XRP AI Asistan</h2>
+<div class="mini">Bu asistan V6'nın canlı verisini ve karar motorunu okur. Kendi başına emir vermez; yorumunu sistemin mevcut verilerine dayandırır.</div>
+<div id="chatLog" style="margin-top:12px;max-height:260px;overflow:auto;background:#0a1020;border:1px solid var(--line);border-radius:12px;padding:12px"><div class="reason">Asistan hazır. Örnek: <b>“XRP şu an nasıl?”</b>, <b>“Neden bekliyoruz?”</b>, <b>“Skor neden 55?”</b></div></div>
+<div style="display:flex;gap:8px;margin-top:10px"><input id="chatInput" placeholder="V6'ya sor..." style="flex:1;background:#0c1424;border:1px solid var(--line);color:white;border-radius:10px;padding:11px"><button id="chatSend">Gönder</button></div>
+</div>
+
+<div class="card section"><h2>🏦 Çoklu borsa konsensüsü</h2><div class="mini note">Spot fiyat uzlaşması 5 borsadan; türev konsensüsü Binance + OKX + Bybit verilerinden hesaplanır. OI değerleri borsalar arası metodoloji farkları nedeniyle doğrudan toplanmaz; yön ve kalite sinyali olarak kullanılır.</div><div class="scores" id="derivCards"></div></div>
+<div class="card section"><h2>🌐 Geniş istihbarat</h2><div class="scores" id="intelCards"></div><div class="cols" style="margin-top:12px"><div class="rows"><div class="row"><span>Çoklu borsa konsensüsü</span><b id="exConsensus">—</b></div><div class="row"><span>Haber duyarlılığı</span><b id="newsSentiment">—</b></div><div class="row"><span>XRPL / on-chain</span><b id="onchain">—</b></div><div class="row"><span>Makro</span><b id="macro">—</b></div></div><div class="rows"><div class="row"><span>Haber sayısı</span><b id="newsCount">—</b></div><div class="row"><span>XRPL işlem sayısı</span><b id="xrplTx">—</b></div><div class="row"><span>1M+ XRP transfer proxy</span><b id="largeXrp">—</b></div><div class="row"><span>Borsa fiyat farkı</span><b id="exchangeSpread">—</b></div><div class="row"><span>OKX / Bybit türev durumu</span><b id="derivHealth">—</b></div></div></div><div class="mini note">Whale göstergesi burada doğrulanmış etiketli cüzdan sistemi değildir; büyük transfer proxy'sidir. Bunu ileride adres etiketleme/veri sağlayıcılarıyla sertleştireceğiz.</div></div>
+<div class="card section"><h2>🧪 Backtest laboratuvarı</h2><div class="buygrid"><div><span>Periyot</span><b id="btPeriod">—</b></div><div><span>İşlem</span><b id="btTrades">—</b></div><div><span>Win rate</span><b id="btWin">—</b></div><div><span>Getiri</span><b id="btReturn">—</b></div><div><span>Max drawdown</span><b id="btDD">—</b></div></div><div class="mini note" id="btNote">Backtest hazırlanıyor…</div></div>
+
+<div class="card section"><h2>📋 Sistem kuralları</h2><table class="table"><tr><th>Katman</th><th>Ağırlık</th><th>Ne arıyor?</th></tr><tr><td>Teknik</td><td>28%</td><td>Trend, momentum, hacim, volatilite</td></tr><tr><td>Piyasa</td><td>16%</td><td>BTC rejimi ve XRP-BTC uyumu</td></tr><tr><td>Futures</td><td>20%</td><td>Funding, OI, long/short, taker akışı</td></tr><tr><td>Mikro yapı</td><td>8%</td><td>Order book, spread, mark/spot</td></tr><tr><td>Risk freni</td><td>8%</td><td>Aşırılık, veri eksikliği, çelişki</td></tr></table></div>
+
+<div class="footer">Bu sistem yatırım tavsiyesi değildir. İlk aşamada analiz/paper-trading içindir. Gerçek emir göndermez ve API anahtarı istemez. Veri kaynaklarının gecikmesi, kesilmesi veya yanlışlığı mümkündür; sistem veri yetersizse işlem sinyalini bloke eder.</div>
+</div>
+<script>
+const $=id=>document.getElementById(id);
+function fmt(n,d=4){return Number(n).toLocaleString('en-US',{minimumFractionDigits:d,maximumFractionDigits:d})}
+function pct(n,d=2){return n==null?'—':(Number(n)*100).toFixed(d)+'%'}
+function motor(name,val,desc){return `<div class="meter"><div class="label">${name}</div><b>${Math.round(val)}/100</b><div class="mini">${desc}</div><div class="meterbar"><div class="meterfill" style="width:${val}%;background:${val>=70?'var(--green)':val>=45?'var(--yellow)':'var(--red)'}"></div></div></div>`}
+function setClass(el,val){el.className=val>=78?'green':val>=45?'yellow':'red'}
+async function get(path){const r=await fetch(path,{cache:'no-store'});if(!r.ok)throw Error(await r.text());return r.json()}
+let position=JSON.parse(localStorage.getItem('xrp_ai_position_v1')||'null');
+function savePosition(){localStorage.setItem('xrp_ai_position_v1',JSON.stringify(position)); renderPosition(window.__lastPrice||null)}
+function renderPosition(price){
+  const status=$('positionStatus'), note=$('positionNote'), pnl=$('posPnl'), last=$('posLast');
+  last.textContent=price?'$'+fmt(price,5):'—';
+  if(!position){status.textContent='POZİSYON YOK';status.className='buydecision yellow';note.textContent='Pozisyon yok. Sistem yeni fırsatları tarıyor.';pnl.textContent='—';return;}
+  const q=Number(position.qty), avg=Number(position.avg), p=Number(price||avg), pnlUsd=(p-avg)*q, pnlPct=avg?((p/avg)-1)*100:0;
+  status.textContent='🟢 POZİSYON AÇIK';status.className='buydecision green';
+  pnl.textContent=(pnlUsd>=0?'+':'')+fmt(pnlUsd,2)+' USDT ('+(pnlPct>=0?'+':'')+pnlPct.toFixed(2)+'%)';
+  pnl.className=pnlUsd>=0?'green':'red';
+  note.textContent='Sistem artık yeni giriş aramak yerine mevcut pozisyonun çıkış riskini izliyor. Kendi satışını yaptığında “SATTIM”a bas.';
+}
+$('boughtBtn').onclick=()=>{const q=Number($('posQty').value),avg=Number($('posAvg').value||window.__lastPrice||0);if(!q||!avg){alert('Miktar ve ortalama alış fiyatını gir.');return;}position={qty:q,avg:avg,openedAt:Date.now()};savePosition();};
+$('soldBtn').onclick=()=>{position=null;savePosition();};
+$('clearPosBtn').onclick=()=>{position=null;localStorage.removeItem('xrp_ai_position_v1');renderPosition(window.__lastPrice||null);};
+renderPosition(null);
+function assistantAnswer(q){
+  const d=window.__lastSnapshot;
+  if(!d || d.error) return 'Şu anda canlı V6 verisi hazır değil. Önce veri bağlantısının yeşile dönmesini bekleyelim.';
+  const x=q.toLowerCase();
+  const score=d.master, short=d.engines.short15m, dec=d.decision;
+  const parts=[];
+  if(x.includes('neden') || x.includes('niye') || x.includes('bekle')){
+    parts.push(`Şu an MASTER skor ${score}/100 ve karar “${dec}”.`);
+    if(d.gates.length) parts.push('İşlem frenleri: '+d.gates.join(', ')+'.');
+    parts.push(`Teknik ${d.engines.technical}, piyasa ${d.engines.market}, futures ${d.engines.futures}, mikro yapı ${d.engines.micro}, güvenlik ${d.engines.safety}/100.`);
+    parts.push(`15M vur-kaç skoru ${short}/100.`);
+  } else if(x.includes('skor') || x.includes('kaç')){
+    parts.push(`MASTER ${score}/100.`);
+    parts.push(`Katmanlar: teknik ${d.engines.technical}, piyasa ${d.engines.market}, futures ${d.engines.futures}, mikro ${d.engines.micro}, güvenlik ${d.engines.safety}.`);
+    parts.push(`15M momentum ${short}/100.`);
+  } else if(x.includes('futures') || x.includes('funding') || x.includes('oi') || x.includes('open interest')){
+    parts.push(`Futures skoru ${d.engines.futures}/100.`);
+    parts.push(`Funding ${pct(d.futures.funding,4)}, OI ${d.futures.openInterest==null?'—':fmt(d.futures.openInterest,0)}, OI değişimi ${pct(d.futures.oiChange)}.`);
+    parts.push(`OKX/Bybit türev konsensüsü ${d.futures.derivativesConsensus==null?'—':d.futures.derivativesConsensus+'/100'}.`);
+  } else if(x.includes('pozisyon') || x.includes('aldım') || x.includes('aldim')){
+    if(position){ const p=d.price, pnl=(p-position.avg)/position.avg*100; parts.push(`Açık pozisyonun var. Ortalama ${fmt(position.avg,5)}$, miktar ${position.qty}. Anlık fiyat ${fmt(p,5)}$. Yaklaşık PnL ${pnl>=0?'+':''}${pnl.toFixed(2)}%.`); }
+    else parts.push('Şu anda kayıtlı açık pozisyon yok.');
+  } else if(x.includes('xrp') || x.includes('şimdi') || x.includes('simdi') || x.includes('durum')){
+    parts.push(`XRP ${fmt(d.price,5)}$. MASTER ${score}/100 ve karar “${dec}”.`);
+    parts.push(`15M ${short}/100; futures ${d.engines.futures}/100; borsa konsensüsü ${d.engines.exchanges}/100.`);
+    parts.push(d.gates.length?'Şu an işlem freni aktif: '+d.gates.join(', ')+'.':'Şu an ana işlem freni görünmüyor.');
+  } else {
+    parts.push(`V6'yı okuyorum: XRP ${fmt(d.price,5)}$, MASTER ${score}/100, karar “${dec}”.`);
+    parts.push(`15M ${short}/100, futures ${d.engines.futures}/100, OKX/Bybit ${d.futures.derivativesConsensus==null?'—':d.futures.derivativesConsensus+'/100'}.`);
+    parts.push('Bana “neden bekliyoruz?”, “futures nasıl?”, “skor neden böyle?” veya “pozisyonum ne durumda?” diye sorabilirsin.');
+  }
+  return parts.join(' ');
+}
+function addChat(who,msg){const el=document.createElement('div');el.className='reason';el.innerHTML=`<b>${who}:</b> ${msg}`;$('chatLog').appendChild(el);$('chatLog').scrollTop=$('chatLog').scrollHeight;}
+function sendChat(){const input=$('chatInput'),q=input.value.trim();if(!q)return;addChat('Sen',q);addChat('V6 Asistan',assistantAnswer(q));input.value='';}
+$('chatSend').onclick=sendChat; $('chatInput').addEventListener('keydown',e=>{if(e.key==='Enter')sendChat();});
+
+let chartRange=120;
+function drawChart(d){
+ const c=$('priceChart'); if(!c||!d.chartData||!d.chartData.length)return;
+ const rect=c.getBoundingClientRect(), ratio=window.devicePixelRatio||1; c.width=rect.width*ratio;c.height=rect.height*ratio;
+ const ctx=c.getContext('2d');ctx.setTransform(ratio,0,0,ratio,0,0);const W=rect.width,H=rect.height;
+ ctx.clearRect(0,0,W,H);const a=d.chartData.slice(-chartRange);let lo=Math.min(...a.map(x=>x.l),...a.map(x=>x.bbl));let hi=Math.max(...a.map(x=>x.h),...a.map(x=>x.bbu));const pad=(hi-lo)*.08;lo-=pad;hi+=pad;
+ const left=52,right=12,top=16,bottom=28, cw=W-left-right,ch=H-top-bottom;const X=i=>left+i/(a.length-1)*cw;const Y=v=>top+(hi-v)/(hi-lo)*ch;
+ ctx.font='11px Arial';ctx.lineWidth=1;ctx.strokeStyle='#1c2940';ctx.fillStyle='#91a0b9';
+ for(let i=0;i<5;i++){const y=top+i/4*ch;ctx.beginPath();ctx.moveTo(left,y);ctx.lineTo(W-right,y);ctx.stroke();ctx.fillText((hi-(hi-lo)*i/4).toFixed(4),5,y+4)}
+ function line(key,dash){ctx.beginPath();ctx.setLineDash(dash||[]);a.forEach((x,i)=>{const xx=X(i),yy=Y(x[key]);if(i)ctx.lineTo(xx,yy);else ctx.moveTo(xx,yy)});ctx.strokeStyle=key==='e20'?'#60a5fa':key==='e50'?'#facc15':key==='e200'?'#fb923c':'#91a0b9';ctx.lineWidth=1.5;ctx.stroke();ctx.setLineDash([])}
+ // Bollinger first
+ line('bbu',[3,4]);line('bbl',[3,4]);line('e200');line('e50');line('e20');
+ const bw=Math.max(2,cw/a.length*.65);a.forEach((x,i)=>{const xx=X(i),yo=Y(x.o),yc=Y(x.c),yh=Y(x.h),yl=Y(x.l);ctx.strokeStyle=x.c>=x.o?'#4ade80':'#fb7185';ctx.fillStyle=ctx.strokeStyle;ctx.beginPath();ctx.moveTo(xx,yh);ctx.lineTo(xx,yl);ctx.stroke();ctx.fillRect(xx-bw/2,Math.min(yo,yc),bw,Math.max(1,Math.abs(yc-yo)));});
+ ctx.fillStyle='#66758f';ctx.fillText(new Date(a[0].t).toLocaleString('tr-TR',{day:'2-digit',hour:'2-digit',minute:'2-digit'}),left,H-8);ctx.fillText(new Date(a[a.length-1].t).toLocaleString('tr-TR',{day:'2-digit',hour:'2-digit',minute:'2-digit'}),W-100,H-8);
+}
+window.addEventListener('resize',()=>{if(window.__lastSnapshot)drawChart(window.__lastSnapshot)});
+document.querySelectorAll('[data-range]').forEach(b=>b.onclick=()=>{document.querySelectorAll('[data-range]').forEach(x=>x.classList.remove('active'));b.classList.add('active');chartRange=Number(b.dataset.range);drawChart(window.__lastSnapshot||{});});
+async function load(){
+  try{
+    const d=await get('/api/snapshot');
+    window.__lastSnapshot=d; window.__lastPrice=d.price; renderPosition(d.price); drawChart(d);
+    if(d.error) throw Error(d.error);
+    $('status').textContent='● CANLI VERİ · '+new Date(d.ts*1000).toLocaleTimeString('tr-TR'); $('status').className='pill green';
+    $('xrp').textContent='$'+fmt(d.price,5); $('btc').textContent='$'+fmt(d.btc,2);
+    $('xrp24').textContent='Canlı piyasa'; $('btc24').textContent=(d.btc24>=0?'+':'')+d.btc24.toFixed(2)+'% / 24s';
+    $('confidence').textContent=d.confidence+'%'; $('quality').textContent=Object.values(d.sources).filter(Boolean).length+'/'+Object.keys(d.sources).length+' kaynak OK';
+    $('score').textContent=d.master+'/100'; $('fill').style.width=d.master+'%'; setClass($('fill'),d.master);
+    $('signal').textContent='XRP: '+d.decision; setClass($('signal'),d.master);
+    $('summary').textContent=d.gates.length?'İşlem freni: '+d.gates.join(' + '):'Tüm ana veri katmanları değerlendirildi.';
+    $('buyPct').textContent=d.master+'%'; $('buyDecision').textContent=d.decision; $('buyFill').style.width=d.master+'%'; $('buyPct').style.color=d.master>=78?'var(--green)':d.master>=45?'var(--yellow)':'var(--red)'; $('buyDecision').style.color=$('buyPct').style.color; $('buyFill').style.background=$('buyPct').style.color;
+    $('buyTech').textContent=d.engines.technical+'%'; $('buyMarket').textContent=d.engines.market+'%'; $('buyFutures').textContent=d.engines.futures+'%'; $('buyMicro').textContent=d.engines.micro+'%'; $('buySafety').textContent=d.engines.safety+'%';
+    $('buyExplanation').textContent=d.gates.length?'Sistem şu anda alımı onaylamıyor: '+d.gates.join(' + ')+'.':d.master>=78?'Birden fazla bağımsız veri katmanı alımı destekliyor.':d.master>=65?'Koşullar olumlu fakat tam teyit yok.':'Avantaj yeterince güçlü değil; beklemek tercih ediliyor.';
+    $('ema').textContent='$'+fmt(d.technical.ema20,5)+' / $'+fmt(d.technical.ema50,5)+' / $'+fmt(d.technical.ema200,5); $('vwap').textContent='$'+fmt(d.technical.vwap1h,5); $('adx').textContent=d.technical.adx1h.toFixed(1); $('atr1h').textContent='$'+fmt(d.technical.atr1h,5); $('rsi').textContent=d.technical.rsi.toFixed(1); $('macd').textContent=d.technical.macd>=0?'POZİTİF':'NEGATİF'; $('bb').textContent=d.price>d.technical.bollUpper?'ÜST BANT':d.price<d.technical.bollLower?'ALT BANT':'KANAL'; $('volume').textContent=d.technical.volumeRatio.toFixed(2)+'x'; $('trend').textContent=d.technical.ema20>d.technical.ema50?'YUKARI':'AŞAĞI';
+    $('btcTrend').textContent=d.btc>d.technical.ema20?'—':'—'; $('btc24small').textContent=(d.btc24>=0?'+':'')+d.btc24.toFixed(2)+'%'; $('btcRsi').textContent='—'; $('alignment').textContent='Motor birleşimi'; $('regime').textContent=d.engines.safety>=75?'NORMAL':d.engines.safety>=50?'DİKKATLİ':'YÜKSEK RİSK';
+    $('funding').textContent=pct(d.futures.funding,4); $('oi').textContent=d.futures.openInterest==null?'—':fmt(d.futures.openInterest,0); $('oiChange').textContent=pct(d.futures.oiChange); $('ls').textContent=d.futures.longShort==null?'—':d.futures.longShort.toFixed(2); $('taker').textContent=d.futures.takerRatio==null?'—':d.futures.takerRatio.toFixed(2)+'x'; $('liq').textContent='Son akış tarandı'; $('derivConsensus').textContent=d.futures.derivativesConsensus==null?'—':d.futures.derivativesConsensus+'/100';
+    $('spread').textContent=pct(d.micro.spread,3); $('book').textContent=d.micro.bookRatio==null?'—':d.micro.bookRatio.toFixed(2)+'x'; $('markGap').textContent=pct(d.micro.markGap,3); $('dataQuality').textContent=d.confidence+'% kaynak kapsaması'; $('updated').textContent=new Date(d.ts*1000).toLocaleTimeString('tr-TR');
+    $('scoreCards').innerHTML=motor('Teknik',d.engines.technical,'Trend + momentum')+motor('Piyasa',d.engines.market,'BTC / piyasa rejimi')+motor('Futures',d.engines.futures,'OI + funding + akış')+motor('Mikro yapı',d.engines.micro,'Order book + spread')+motor('Güvenlik',d.engines.safety,'Risk freni');
+    $('intelCards').innerHTML=motor('Borsalar',d.engines.exchanges,'Spot: Binance + Coinbase + Kraken + OKX + Bybit · Türev: Binance + OKX + Bybit')+motor('Haber',d.engines.news,d.intel.newsCount+' haber')+motor('On-chain',d.engines.onchain,'XRPL ledger aktivitesi')+motor('Makro',d.engines.macro,'DXY + ABD 10Y');
+    $('exConsensus').textContent=d.engines.exchanges+'/100'; $('derivHealth').textContent=(d.futures.derivativesHealth??0)+'% OK'; $('derivCards').innerHTML=Object.entries(d.futures.derivatives||{}).map(([name,v])=>motor(name,v.score==null?0:v.score, v.available?`Funding ${pct(v.funding,4)} · OI ${v.openInterest==null?'—':fmt(v.openInterest,0)} · Book ${v.bookRatio==null?'—':v.bookRatio.toFixed(2)}x`:'Veri alınamadı')).join('')+motor('Türev Konsensüsü',d.futures.derivativesConsensus??0,'Binance + OKX + Bybit'); $('newsSentiment').textContent=d.engines.news+'/100'; $('onchain').textContent=d.engines.onchain+'/100'; $('macro').textContent=d.engines.macro+'/100'; $('newsCount').textContent=d.intel.newsCount; $('xrplTx').textContent=d.intel.xrplTx??'—'; $('largeXrp').textContent=d.intel.largeXrpTransfers??'—'; $('exchangeSpread').textContent=pct(d.intel.exchangeSpread,3);
+    $('short15').textContent=d.engines.short15m+' / 100'; $('atr15').textContent='$'+fmt(d.technical.atr15m,5);
+    $('shortScore').textContent=d.engines.short15m+'/100'; $('tradeDecision').textContent=d.tradePlan.exitWarning?'⚠️ ÇIKIŞ / BEKLE':d.master>=80&&d.engines.short15m>=65?'🟢 HIZLI GİRİŞ':d.master>=70&&d.engines.short15m>=58?'🟡 TEYİTLE GİRİŞ':'⏸️ BEKLE';
+    $('entryZone').textContent='$'+fmt(d.tradePlan.entryLow,5)+' – $'+fmt(d.tradePlan.entryHigh,5); $('tradeStop').textContent='$'+fmt(d.tradePlan.stop,5); $('tp1').textContent='$'+fmt(d.tradePlan.tp1,5); $('tp2').textContent='$'+fmt(d.tradePlan.tp2,5); $('rr').textContent='1:'+Math.max(d.tradePlan.rr1,d.tradePlan.rr2).toFixed(1);
+    $('tradeExplain').textContent=d.tradePlan.exitWarning?'Kısa vadeli yapı bozuluyor; yeni giriş kovalanmıyor. Pozisyondaysan risk azaltma/çıkış değerlendir.':d.engines.short15m>=65?'15M momentum güçlü. Hızlı giriş için ana skor da yeterliyse plan aktive olur.':d.engines.short15m>=58?'Momentum oluşuyor ama teyit eksik; fiyatı kovalamak yerine bekle.':'15M momentum zayıf; vur-kaç işlemi için avantaj yok.';
+    $('reasons').innerHTML=[...d.risks.map(x=>'⚠️ '+x), ...d.intel.headlines.slice(0,5).map(x=>'📰 '+x)].map(x=>`<div class="reason">${x}</div>`).join('')||'<div class="reason">Belirgin ek risk yok.</div>';
+    $('riskText').textContent=d.gates.length?'İŞLEM ENGELLENDİ: '+d.gates.join(' + '):d.engines.safety>=75?'Risk freni açık değil.':'Risk freni dikkat istiyor.'; $('riskTags').innerHTML=d.risks.map(x=>`<span class="tag bad">⚠ ${x}</span>`).join('')||'<span class="tag ok">✓ Kritik risk etiketi yok</span>';
+  }catch(e){$('status').textContent='● VERİ HATASI';$('status').className='pill red';$('summary').textContent='Sunucu/veri hatası: '+e.message;console.error(e)}
+}
+async function backtest(){try{const d=await get('/api/backtest?days=365');$('btPeriod').textContent=Math.round(d.periodHours/24)+' gün';$('btTrades').textContent=d.trades;$('btWin').textContent=d.winRate+'%';$('btReturn').textContent=d.returnPct+'%';$('btDD').textContent=d.maxDrawdownPct+'%';$('btNote').textContent=d.note}catch(e){$('btNote').textContent='Backtest hatası: '+e.message}}
+load();backtest();setInterval(load,30000);
+</script></body></html>
